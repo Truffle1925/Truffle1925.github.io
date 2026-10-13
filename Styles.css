@@ -1,0 +1,584 @@
+/* ==========================================================
+   Palette (sampled from the Northstar logo + Starboard pattern)
+   --ns-ink    #00171F  logo outline / header
+   --ns-navy   #003459  logo dark facets
+   --ns-sky    #00A7E3  logo light facets
+   --ns-mist   #E8F5FB  derived pale tint of sky (page backgrounds)
+   --ns-mist-deep #CFEAF7  derived slightly deeper tint (panels)
+   ========================================================== */
+:root {
+    --ns-ink: #00171F;
+    --ns-navy: #003459;
+    --ns-sky: #00A7E3;
+    --ns-white: #FFFFFF;
+    --ns-mist: #E8F5FB;
+    --ns-mist-deep: #CFEAF7;
+    --header-h: 4.5rem;
+    --footer-h: 10rem; /* Script.js replaces this with the footer's real height */
+
+    /* Brand fonts (loaded from Google Fonts in Index.html) */
+    --font-title: "Barlow", Arial, sans-serif;     /* headers, titles, bold/emphasized wording */
+    --font-detail: "Cinzel", Georgia, serif;       /* detail text */
+}
+
+/* ---------- Shared / legacy pages (Proposal, DOM, etc.) ---------- */
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+body {
+    margin: 0;
+    padding: 7rem 2rem 2rem;
+    background-color: var(--ns-mist);
+    color: var(--ns-ink);
+    font-family: Arial, sans-serif;
+}
+
+.panel-grid {
+    max-width: 1400px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.panel {
+    padding: 1.5rem;
+    background-color: white;
+    border: 2px solid var(--ns-navy);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 23, 31, 0.15);
+}
+
+.panel img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+}
+
+.panel table {
+    width: 100%;
+}
+
+.button {
+    display: block;
+    padding: 1rem;
+    background-color: var(--ns-sky);
+    color: var(--ns-ink);
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.proposal-button-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button:hover,
+.button:focus {
+    background-color: var(--ns-navy);
+    color: white;
+    transform: translateY(-4px);
+}
+
+.site-header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--ns-ink);
+    color: var(--ns-sky);
+    text-align: center;
+    z-index: 1030;
+}
+
+.site-header a {
+    display: inline-block;
+    margin: 0.5rem;
+    padding: 0.6rem 1rem;
+    background-color: var(--ns-navy);
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.site-header a:hover,
+.site-header a:focus {
+    background-color: var(--ns-sky);
+    color: var(--ns-ink);
+}
+
+.col-bg {
+    background-color: var(--ns-mist-deep);
+}
+
+
+/* ==========================================================
+   Landing page (Index.html) — everything below is scoped to
+   body.landing or to new class names so other pages are
+   unaffected.
+   ========================================================== */
+
+body.landing {
+    padding: var(--header-h) 0 0;
+    background-color: var(--ns-white);
+    color: var(--ns-navy);
+    font-family: var(--font-detail);
+    font-size: 1rem;
+    line-height: 1.75;
+    letter-spacing: 0.01em;
+}
+
+/* Barlow: headers, titles, buttons, and anything bold/emphasized */
+body.landing h1,
+body.landing h2,
+body.landing strong,
+body.landing b,
+body.landing .brand-name,
+body.landing .button {
+    font-family: var(--font-title);
+}
+
+body.landing strong,
+body.landing b {
+    font-weight: 700;
+}
+
+body.landing .button {
+    font-weight: 600;
+    font-size: 1.125rem;
+    letter-spacing: 0.04em;
+}
+
+/* ---------- Header: hides on scroll down, returns on scroll up ---------- */
+
+.brand-header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: var(--header-h);
+    background-color: var(--ns-ink);
+    border-bottom: 2px solid var(--ns-navy);
+    z-index: 1030;
+    transition: transform 0.3s ease;
+}
+
+.brand-header.is-hidden {
+    transform: translateY(-100%);
+}
+
+.brand-header__bar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    height: 100%;
+    padding: 0 1.25rem;
+}
+
+.brand-name {
+    color: var(--ns-white);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+}
+
+.brand-name:hover {
+    color: var(--ns-sky);
+}
+
+.brand-logo-link {
+    display: block;
+    margin-left: auto;
+    line-height: 0;
+}
+
+.brand-logo {
+    display: block;
+    height: calc(var(--header-h) - 1.25rem);
+    width: auto;
+}
+
+/* Hamburger button */
+
+.menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0 0.6rem;
+    background: transparent;
+    border: 2px solid var(--ns-sky);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.menu-toggle:hover {
+    background-color: var(--ns-navy);
+}
+
+.menu-toggle__bar {
+    display: block;
+    height: 2px;
+    background-color: var(--ns-sky);
+    transition: transform 0.25s ease, opacity 0.2s ease;
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle__bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle__bar:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle__bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Dropdown menu */
+
+.site-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 16rem;
+    padding: 0.75rem;
+    background-color: var(--ns-ink);
+    border: 2px solid var(--ns-navy);
+    border-top: 0;
+    border-radius: 0 0 8px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-0.5rem);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s;
+}
+
+.site-menu.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition-delay: 0s;
+}
+
+.brand-header a:focus-visible,
+.menu-toggle:focus-visible {
+    outline: 3px solid var(--ns-sky);
+    outline-offset: 3px;
+}
+
+.site-menu .button:focus-visible {
+    outline-color: var(--ns-white);
+}
+
+/* ---------- Banners ---------- */
+
+.banner {
+    display: block;
+    width: 100%;
+    height: clamp(8rem, 20vw, 18rem);
+    object-fit: cover;
+    background-color: #000;
+}
+
+.banner--end {
+    object-position: center bottom;
+}
+
+/* ---------- Intro / projects / skills ---------- */
+
+.intro-section {
+    padding: clamp(3.5rem, 9vw, 7rem) 0;
+    background-color: var(--ns-white);
+}
+
+.intro-section h1 {
+    max-width: 16ch;
+    margin: 0 0 1.25rem;
+    color: var(--ns-navy);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+}
+
+.intro-lead {
+    max-width: 38rem;
+    margin: 0 0 clamp(2.5rem, 6vw, 4.5rem);
+    font-size: 1.125rem;
+}
+
+.intro-col {
+    height: 100%;
+    padding-top: 1rem;
+    border-top: 4px solid var(--ns-sky);
+}
+
+.intro-col h2 {
+    margin: 0 0 0.75rem;
+    color: var(--ns-navy);
+    font-size: 1.75rem;
+    font-weight: 700;
+}
+
+.intro-col p,
+.intro-col ul {
+    margin: 0 0 0.75rem;
+}
+
+.intro-col ul {
+    padding-left: 1.25rem;
+}
+
+/* ---------- Scroll-by background with overlaid text ---------- */
+
+.guide-section {
+    position: relative;
+    padding: 4rem 0;
+    background-color: #000;
+    background-image: url("Starboard.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* the stars stay put while the text scrolls past */
+    color: var(--ns-white);
+}
+
+.guide-step {
+    display: flex;
+    align-items: center;
+    min-height: 85vh;
+}
+
+.guide-step--right .guide-text {
+    margin-left: auto;
+}
+
+.guide-text {
+    max-width: 36rem;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    background-color: rgba(0, 23, 31, 0.86);
+    border-left: 4px solid var(--ns-sky);
+    border-radius: 0 8px 8px 0;
+}
+
+.guide-text h2 {
+    margin: 0 0 0.75rem;
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.15;
+}
+
+.guide-text p {
+    margin: 0;
+}
+
+.guide-text--finale {
+    max-width: 44rem;
+}
+
+.guide-text--finale h2 {
+    font-size: clamp(2rem, 5.5vw, 3.75rem);
+}
+
+/* Text fades in as it scrolls into view (only when JS is running) */
+
+.js .guide-text {
+    opacity: 0;
+    transform: translateY(2rem);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.js .guide-text.is-visible {
+    opacity: 1;
+    transform: none;
+}
+
+/* ---------- Footer: revealed from behind the page when you reach the bottom ---------- */
+
+.brand-footer {
+    background-color: var(--ns-ink);
+    border-top: 2px solid var(--ns-sky);
+    color: var(--ns-white);
+    padding: 1.75rem 0 1rem;
+}
+
+.footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem 2rem;
+}
+
+.footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.footer-brand img {
+    display: block;
+    height: 3rem;
+    width: auto;
+}
+
+.footer-brand .brand-name {
+    font-size: 1.5rem;
+}
+
+.footer-contact h2 {
+    margin: 0 0 0.25rem;
+    color: var(--ns-white);
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.footer-contact p {
+    margin: 0;
+}
+
+.brand-footer a {
+    color: var(--ns-sky);
+    text-decoration: none;
+}
+
+.brand-footer a:hover {
+    color: var(--ns-white);
+}
+
+.brand-footer a:focus-visible {
+    outline: 3px solid var(--ns-sky);
+    outline-offset: 3px;
+}
+
+.footer-social {
+    display: flex;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.footer-social a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 2px solid var(--ns-sky);
+    border-radius: 6px;
+    font-size: 1.25rem;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.footer-social a:hover,
+.footer-social a:focus-visible {
+    background-color: var(--ns-sky);
+    color: var(--ns-ink);
+}
+
+.footer-legal {
+    margin: 1.25rem 0 0;
+    color: var(--ns-sky);
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+/* With JS, the footer is pinned to the bottom of the screen *behind* the page.
+   The page gets matching bottom padding, so scrolling to the end uncovers it.
+   Without JS it simply sits at the end of the page. */
+.js body.landing {
+    padding-bottom: var(--footer-h);
+}
+
+.js body.landing main {
+    position: relative;
+    z-index: 1;
+}
+
+.js .brand-footer {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+}
+
+@media (max-width: 767.98px) {
+    .footer-inner {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* iOS and many touch browsers ignore fixed backgrounds — fall back to a tiled scroll */
+@media (max-width: 768px), (hover: none) {
+    .guide-section {
+        background-attachment: scroll;
+        background-size: 100% auto;
+        background-repeat: repeat-y;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .brand-name {
+        font-size: 1.25rem;
+    }
+
+    .guide-step {
+        min-height: 70vh;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .brand-header,
+    .menu-toggle__bar,
+    .site-menu,
+    .js .guide-text {
+        transition: none;
+    }
+
+    .js .guide-text {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* Shared content pages */
+.landing a:not(.button):not(.brand-name):not(.brand-logo-link):not(.project-card) { color: var(--ns-navy); text-underline-offset: .2em; }
+.landing .brand-footer a { color: var(--ns-sky) !important; }
+.landing a:hover { text-decoration-thickness: 2px; }
+.landing a:focus-visible { outline: 3px solid var(--ns-sky); outline-offset: 4px; }
+.site-menu .button[aria-current="page"] { background: var(--ns-mist); }
+.content-stack { display: grid; gap: 2.5rem; max-width: 58rem; }
+.inner-page h3 { font-family: var(--font-title); }
+.placeholder-copy { color: #476779; }
+.project-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
+.project-card { display: flex; flex-direction: column; color: var(--ns-navy); text-decoration: none; background: var(--ns-mist); border-top: 4px solid var(--ns-sky); border-radius: 0 0 8px 8px; overflow: hidden; transition: box-shadow .2s ease; }
+.project-card:hover { color: var(--ns-navy); box-shadow: 0 4px 20px rgba(0,23,31,.15); }
+.project-card > img, .project-placeholder { width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: var(--ns-ink); }
+.project-placeholder { display: grid; place-items: center; color: var(--ns-sky); font-size: 5rem; background-image: url('Starboard.png'); background-size: cover; }
+.project-card > div:last-child { padding: 1.5rem; }
+.project-action, .tech { font-family: var(--font-title); font-weight: 600; }
+.game-embed { display: block; width: 100%; max-width: 552px; border: 0; margin-bottom: 1rem; }
+.screenshot-gallery { display: grid; gap: 1.5rem; }
+.screenshot-gallery figure { margin: 0; }
+.screenshot-gallery img { display: block; width: 100%; height: auto; border: 2px solid var(--ns-navy); border-radius: 6px; }
+.contact-links { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; list-style: none; padding: 0; }
+.footer-social { flex-wrap: wrap; }
+.footer-contact, .content-stack { overflow-wrap: anywhere; }
+@media (max-width: 767.98px) { .project-grid { grid-template-columns: 1fr; } .footer-social { justify-content: center; } }
