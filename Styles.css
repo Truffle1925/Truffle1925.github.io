@@ -16,7 +16,7 @@
     --header-h: 4.5rem;
     --footer-h: 10rem; /* Script.js replaces this with the footer's real height */
 
-    /* Brand fonts (loaded from Google Fonts in Index.html) */
+    /* Brand fonts (loaded from Google Fonts in index.html) */
     --font-title: "Barlow", Arial, sans-serif;     /* headers, titles, bold/emphasized wording */
     --font-detail: "Cinzel", Georgia, serif;       /* detail text */
 }
@@ -120,7 +120,7 @@ body {
 
 
 /* ==========================================================
-   Landing page (Index.html) — everything below is scoped to
+   Landing page (index.html) — everything below is scoped to
    body.landing or to new class names so other pages are
    unaffected.
    ========================================================== */
@@ -295,7 +295,8 @@ body.landing .button {
 }
 
 .banner--end {
-    object-position: center bottom;
+    object-fit: cover;
+    object-position: center 53%;
 }
 
 /* ---------- Intro / projects / skills ---------- */
@@ -349,7 +350,7 @@ body.landing .button {
     position: relative;
     padding: 4rem 0;
     background-color: #000;
-    background-image: url("Starboard.png");
+    background-image: url("GrandTopo-expanded.png");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
